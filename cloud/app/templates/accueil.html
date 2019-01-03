@@ -1,0 +1,40 @@
+{%extends "base.html"%}
+
+{%block content%}
+<h2>Lancement des éléctions</h2>
+<hr>
+<form action="{{url_for('generation')}}" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{form.nbCandidats.label}}<br/>
+        {{form.nbCandidats(size=32,class_="form-control")}}<br/>
+        {%for error in form.nbCandidats.errors%}
+        <span style="color : red">{{error}}</span>
+        {%endfor%}
+    </div>
+    <div class="form-group">
+        {{form.nbScrutateurs.label}}<br/>
+        {{form.nbScrutateurs(size=32,class_="form-control")}}<br/>
+        {%for error in form.nbScrutateurs.errors%}
+        <span style="color : red">{{error}}</span>
+        {%endfor%}
+    </div>
+    <div class="form-group">
+        {{form.nbBureaux.label}}<br/>
+        {{form.nbBureaux(size=32,class_="form-control")}}<br/>
+        {%for error in form.nbBureaux.errors%}
+        <span style="color : red">{{error}}</span>
+        {%endfor%}
+    </div>
+    <div class="form-group">
+        {{form.nbInscrits.label}}<br/>
+        {{form.nbInscrits(size=32,class_="form-control")}}<br/>
+        {%for error in form.nbInscrits.errors%}
+        <span style="color : red">{{error}}</span>
+        {%endfor%}
+    </div>
+    <p>
+        {{form.submit(class_="btn btn-success")}}
+    </p>
+</form>
+{%endblock%}
