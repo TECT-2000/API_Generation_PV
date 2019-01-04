@@ -1,8 +1,12 @@
+from os import uname_result
+
 from app import app
 from app.forms import ElectionForm
-from flask import render_template,request,flash,jsonify
+from flask import render_template,request,flash,jsonify,redirect,url_for
 from .controllers import generationPV
 import os
+import json,urllib.request
+import requests
 
 @app.route("/",methods=['GET'])
 def index():
@@ -26,5 +30,14 @@ def generation():
     generationPV(nbInscrits, nbBureaux, nbScrutateurs, nbCandidats)
     response=jsonify({"code":"success",'url':os.getcwd()})
     response.status_code=200
-    return response
+    #return response
+    return redirect(url_for('envoi'))
     #return render_template('fin.html')
+
+@app.route("/envoi_blockchain/")
+def envoi():
+    url=os.getcwd()
+    r=urllib.request.urlopen("http://localhost:6000/stockage?url="+url).read()
+    return r
+
+
