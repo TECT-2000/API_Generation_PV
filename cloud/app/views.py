@@ -38,6 +38,6 @@ def generation():
 def envoi():
     url=os.getcwd()
     r=urllib.request.urlopen("http://localhost:6000/stockage?url="+url).read()
-    return r
+    return jsonify({"code":"success","url":url})
 
 
